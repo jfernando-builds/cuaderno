@@ -72,7 +72,11 @@ export default function Home() {
 
       <h2>1. Upload Evidence</h2>
 
-      <input type="file" onChange={handleFileChange} />
+      <input
+  type="file"
+  accept=".pdf,image/png,image/jpeg"
+  onChange={handleFile}
+/>
 
       {fileName && (
         <p>
