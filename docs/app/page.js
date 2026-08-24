@@ -51,7 +51,9 @@ export default function Home() {
         fontFamily: "Arial, sans-serif",
       }}
     >
-      <h1>Evidence Organizer</h1>
+      <h1>organizador de evidencia
+
+      </h1>
 
       <p>
         Turn fragmented economic evidence into a clear, reviewable Evidence
@@ -70,7 +72,9 @@ export default function Home() {
         calculate a credit score, determine eligibility, or recommend approval.
       </div>
 
-      <h2>1. Upload Evidence</h2>
+      <h2>1. subir evidencia
+
+      </h2>
 
       <input
   type="file"
@@ -94,16 +98,19 @@ onChange={handleFileChange}
           cursor: "pointer",
         }}
       >
-        Analyze Evidence
+        revisar evidencia
+
       </button>
 
       {analyzed && (
         <section style={{ marginTop: "40px" }}>
-          <h2>2. Extracted Evidence</h2>
+          <h2>2. evidencia organizada
+
+          </h2>
 
           <p>
-            <strong>Simulated AI output:</strong> The fields below are demo
-            extraction results. Extraction does not prove authenticity.
+            <strong>Resultado simulado para esta demostracion:</strong> 
+            La información mostrada no comprueba que el documento sea auténtico.
           </p>
 
           <div style={{ display: "grid", gap: "16px" }}>
@@ -157,7 +164,9 @@ onChange={handleFileChange}
                 style={{ display: "block", width: "100%", padding: "8px" }}
               />
               <small>
-                Source: ticket reference · Status: <strong>Uncertain</strong>
+                Source: ticket reference · Status: <strong>no confirmado
+                    
+                </strong>
               </small>
             </label>
           </div>
