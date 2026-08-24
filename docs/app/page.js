@@ -75,7 +75,8 @@ export default function Home() {
       <input
   type="file"
   accept=".pdf,image/png,image/jpeg"
-  onChange={handleFile}
+onChange={handleFileChange}
+
 />
 
       {fileName && (
