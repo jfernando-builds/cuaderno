@@ -17,6 +17,11 @@ export default function Home() {
     }
 
     const allowedTypes = ["image/png", "image/jpeg", "image/jpg"];
+if (file.size > 10 * 1024 * 1024) {
+  setError("Please upload an image smaller than 10 MB.");
+  setFileName("");
+  return;
+}
 
     if (!allowedTypes.includes(file.type)) {
       setError("Please upload a JPG or PNG image.");
