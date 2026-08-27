@@ -53,11 +53,28 @@ if (file.size > 10 * 1024 * 1024) {
 
     // Simulated AI result for this first build.
     // This will be clearly labeled on screen.
-    setResult({
-      status: "Inconsistent",
-      expected: expectedName,
-      found: "Carlos Ramírez",
-    });
+   const cleanName = expectedName.trim().toLowerCase();
+
+if (cleanName.includes("carlos lopez")) {
+  setResult({
+    status: "Consistent",
+    expected: expectedName,
+    found: "Carlos Lopez",
+  });
+} else if (cleanName.includes("sin dato")) {
+  setResult({
+    status: "Insufficient",
+    expected: expectedName,
+    found: "",
+  });
+} else {
+  setResult({
+    status: "Inconsistent",
+    expected: expectedName,
+    found: "Carlos Ramirez",
+  });
+}
+
   }
 
   return (
@@ -181,12 +198,22 @@ if (file.size > 10 * 1024 * 1024) {
               padding: "22px",
             }}
           >
-            <h2>Information does not match</h2>
+            <h2>
+  {result.status === "Consistent"
+    ? "Information matches"
+    : result.status === "Insufficient"
+    ? "Not enough information"
+    : "Information does not match"}
+</h2>
 
-            <p>
-              This difference may matter before you pay.
-              It does not prove fraud.
-            </p>
+<p>
+  {result.status === "Consistent"
+    ? "The available information matches. This does not prove that the person is safe or trustworthy."
+    : result.status === "Insufficient"
+    ? "There is not enough information to compare. Missing information does not make the person suspicious."
+    : "This difference may matter before you pay. It does not prove fraud."}
+</p>
+
 
             <hr style={{ margin: "20px 0" }} />
 
