@@ -165,14 +165,16 @@ onChange={handleFileChange}
               />
               <small>
                 Source: ticket reference · Status: <strong>no confirmado
-                    
+    
                 </strong>
               </small>
             </label>
           </div>
 
           <div style={{ marginTop: "30px" }}>
-            <h2>3. Create Evidence Package</h2>
+            <h2>3. Crear paquete de evidencia
+            
+            </h2>
 
             <button
               onClick={() =>
