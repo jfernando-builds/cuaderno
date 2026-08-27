@@ -1,13 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
+
 
 export default function Home() {
   const [fileName, setFileName] = useState("");
   const [expectedName, setExpectedName] = useState("");
   const [result, setResult] = useState(null);
   const [error, setError] = useState("");
-
+const fileInputRef = useRef(null);
   function handleFileChange(event) {
     const file = event.target.files?.[0];
 
@@ -115,6 +116,7 @@ if (cleanName.includes("carlos lopez")) {
 
           <input
             type="file"
+            ref={fileInputRef}
             accept="image/png,image/jpeg"
             onChange={handleFileChange}
           />
@@ -239,7 +241,11 @@ if (cleanName.includes("carlos lopez")) {
                 setResult(null);
                 setFileName("");
                 setExpectedName("");
-              }}
+              if (fileInputRef.current) {
+  fileInputRef.current.value = "";
+}
+}}
+            
               style={{
                 marginTop: "10px",
                 padding: "12px 18px",
