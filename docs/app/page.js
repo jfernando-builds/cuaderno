@@ -4,15 +4,9 @@ import { useState } from "react";
 
 export default function Home() {
   const [fileName, setFileName] = useState("");
-  const [analyzed, setAnalyzed] = useState(false);
-
-  const [evidence, setEvidence] = useState({
-    amount: "70.00 MXN",
-    date: "15/05/2024",
-    merchant: "Café Buen Día",
-    paymentMethod: "Tarjeta",
-    reference: "00012345",
-  });
+  const [expectedName, setExpectedName] = useState("");
+  const [result, setResult] = useState(null);
+  const [error, setError] = useState("");
 
   function handleFileChange(event) {
     const file = event.target.files?.[0];
@@ -22,176 +16,212 @@ export default function Home() {
       return;
     }
 
-    setFileName(file.name);
-    setAnalyzed(false);
-  }
+    const allowedTypes = ["image/png", "image/jpeg", "image/jpg"];
 
-  function handleAnalyze() {
-    if (!fileName) {
-      alert("Please choose a sample evidence file first.");
+    if (!allowedTypes.includes(file.type)) {
+      setError("Please upload a JPG or PNG image.");
+      setFileName("");
       return;
     }
 
-    setAnalyzed(true);
+    setError("");
+    setFileName(file.name);
   }
 
-  function updateEvidence(field, value) {
-    setEvidence((current) => ({
-      ...current,
-      [field]: value,
-    }));
+  function handleCompare() {
+    if (!fileName) {
+      setError("Please upload an image first.");
+      return;
+    }
+
+    if (!expectedName.trim()) {
+      setError("Please enter the expected name.");
+      return;
+    }
+
+    if (expectedName.length > 80) {
+      setError("The name must be 80 characters or fewer.");
+      return;
+    }
+
+    setError("");
+
+    // Simulated AI result for this first build.
+    // This will be clearly labeled on screen.
+    setResult({
+      status: "Inconsistent",
+      expected: expectedName,
+      found: "Carlos Ramírez",
+    });
   }
 
   return (
     <main
       style={{
-        maxWidth: "900px",
-        margin: "0 auto",
-        padding: "40px",
+        minHeight: "100vh",
+        background: "#f6f7f9",
+        padding: "40px 20px",
         fontFamily: "Arial, sans-serif",
       }}
     >
-      <h1>organizador de evidencia
-
-      </h1>
-
-      <p>
-        Turn fragmented economic evidence into a clear, reviewable Evidence
-        Package.
-      </p>
-
       <div
         style={{
-          padding: "14px",
-          background: "#f3f6fb",
-          borderRadius: "8px",
-          marginBottom: "30px",
+          maxWidth: "620px",
+          margin: "0 auto",
+          background: "white",
+          borderRadius: "18px",
+          padding: "32px",
+          boxShadow: "0 8px 30px rgba(0,0,0,0.08)",
         }}
       >
-        <strong>Important:</strong> This tool organizes evidence. It does not
-        calculate a credit score, determine eligibility, or recommend approval.
-      </div>
+        <h1 style={{ fontSize: "32px", marginBottom: "8px" }}>
+          Check before you pay
+        </h1>
 
-      <h2>1. subir evidencia
-
-      </h2>
-
-      <input
-  type="file"
-  accept=".pdf,image/png,image/jpeg"
-onChange={handleFileChange}
-
-/>
-
-      {fileName && (
-        <p>
-          Selected file: <strong>{fileName}</strong>
+        <p style={{ marginBottom: "30px", lineHeight: "1.5" }}>
+          Compare payment information before sending money.
         </p>
-      )}
 
-      <button
-        onClick={handleAnalyze}
-        style={{
-          display: "block",
-          marginTop: "20px",
-          padding: "10px 18px",
-          cursor: "pointer",
-        }}
-      >
-        revisar evidencia
-
-      </button>
-
-      {analyzed && (
-        <section style={{ marginTop: "40px" }}>
-          <h2>2. evidencia organizada
-
+        <div style={{ marginBottom: "26px" }}>
+          <h2 style={{ fontSize: "20px" }}>
+            1. Upload a screenshot
           </h2>
 
-          <p>
-            <strong>Resultado simulado para esta demostracion:</strong> 
-            La información mostrada no comprueba que el documento sea auténtico.
+          <p style={{ lineHeight: "1.5" }}>
+            Upload a WhatsApp screenshot or payment image.
           </p>
 
-          <div style={{ display: "grid", gap: "16px" }}>
-            <label>
-              Amount
-              <input
-                value={evidence.amount}
-                onChange={(e) => updateEvidence("amount", e.target.value)}
-                style={{ display: "block", width: "100%", padding: "8px" }}
-              />
-              <small>Source: receipt total</small>
-            </label>
+          <input
+            type="file"
+            accept="image/png,image/jpeg"
+            onChange={handleFileChange}
+          />
 
-            <label>
-              Date
-              <input
-                value={evidence.date}
-                onChange={(e) => updateEvidence("date", e.target.value)}
-                style={{ display: "block", width: "100%", padding: "8px" }}
-              />
-              <small>Source: receipt date line</small>
-            </label>
+          {fileName && (
+            <p style={{ marginTop: "10px" }}>
+              Selected: <strong>{fileName}</strong>
+            </p>
+          )}
+        </div>
 
-            <label>
-              Merchant
-              <input
-                value={evidence.merchant}
-                onChange={(e) => updateEvidence("merchant", e.target.value)}
-                style={{ display: "block", width: "100%", padding: "8px" }}
-              />
-              <small>Source: receipt header</small>
-            </label>
+        <div style={{ marginBottom: "26px" }}>
+          <h2 style={{ fontSize: "20px" }}>
+            2. Who are you expecting to pay?
+          </h2>
 
-            <label>
-              Payment Method
-              <input
-                value={evidence.paymentMethod}
-                onChange={(e) =>
-                  updateEvidence("paymentMethod", e.target.value)
-                }
-                style={{ display: "block", width: "100%", padding: "8px" }}
-              />
-              <small>Source: payment-method line</small>
-            </label>
+          <input
+            type="text"
+            placeholder="Name or identifier"
+            value={expectedName}
+            maxLength={80}
+            onChange={(e) => setExpectedName(e.target.value)}
+            style={{
+              width: "100%",
+              padding: "14px",
+              borderRadius: "10px",
+              border: "1px solid #bbb",
+              fontSize: "16px",
+              boxSizing: "border-box",
+            }}
+          />
+        </div>
 
-            <label>
-              Reference
-              <input
-                value={evidence.reference}
-                onChange={(e) => updateEvidence("reference", e.target.value)}
-                style={{ display: "block", width: "100%", padding: "8px" }}
-              />
-              <small>
-                Source: ticket reference · Status: <strong>no confirmado
-    
-                </strong>
-              </small>
-            </label>
+        {error && (
+          <div
+            style={{
+              background: "#fff3f3",
+              border: "1px solid #e0a0a0",
+              padding: "14px",
+              borderRadius: "10px",
+              marginBottom: "20px",
+            }}
+          >
+            {error}
           </div>
+        )}
 
-          <div style={{ marginTop: "30px" }}>
-            <h2>3. Crear paquete de evidencia
-            
-            </h2>
+        <button
+          onClick={handleCompare}
+          style={{
+            width: "100%",
+            padding: "15px",
+            border: "none",
+            borderRadius: "10px",
+            fontSize: "17px",
+            cursor: "pointer",
+            background: "#111",
+            color: "white",
+          }}
+        >
+          Compare information
+        </button>
+
+        <p
+          style={{
+            marginTop: "12px",
+            fontSize: "13px",
+            color: "#666",
+          }}
+        >
+          AI analysis is simulated in this build.
+        </p>
+
+        {result && (
+          <div
+            style={{
+              marginTop: "30px",
+              border: "1px solid #d6b2b2",
+              background: "#fff7f7",
+              borderRadius: "14px",
+              padding: "22px",
+            }}
+          >
+            <h2>Information does not match</h2>
+
+            <p>
+              This difference may matter before you pay.
+              It does not prove fraud.
+            </p>
+
+            <hr style={{ margin: "20px 0" }} />
+
+            <p>
+              <strong>Expected name:</strong>
+              <br />
+              {result.expected}
+            </p>
+
+            <p>
+              <strong>Name found in payment evidence:</strong>
+              <br />
+              {result.found}
+            </p>
+
+            <p style={{ marginTop: "20px" }}>
+              This tool only compares the available information.
+              You make the final decision.
+            </p>
 
             <button
-              onClick={() =>
-                alert(
-                  "Evidence Package created for human review. No credit decision was made."
-                )
-              }
+              onClick={() => {
+                setResult(null);
+                setFileName("");
+                setExpectedName("");
+              }}
               style={{
+                marginTop: "10px",
                 padding: "12px 18px",
+                borderRadius: "10px",
+                border: "1px solid #333",
                 cursor: "pointer",
+                background: "white",
               }}
             >
-              Create Evidence Package
+              Check another case
             </button>
           </div>
-        </section>
-      )}
+        )}
+      </div>
     </main>
   );
 }
