@@ -17,7 +17,8 @@ export default function Home() {
       score: 84,
       level: "Intermedio Alto",
       confidence: 0.82,
-      status: "VERIFICADA",
+    status: answer.length < 80 ? "NEEDS HUMAN REVIEW" : "VERIFICADA",
+    
     });
   }
 
