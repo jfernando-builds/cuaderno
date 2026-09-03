@@ -109,7 +109,7 @@ match: 86,
             <h2>Oportunidad compatible</h2>
             <h3>Analista Junior de Negocios — Café del Centro</h3>
             <p>
-              Internship simulado · Ciudad de México · Modalidad híbrida
+            Internship simulado · Empresa ficticia · Ciudad de México · Modalidad híbrida
             </p>
             <p>
               Tu habilidad demostrada de Análisis de Negocio coincide con esta
