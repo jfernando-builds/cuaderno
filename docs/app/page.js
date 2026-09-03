@@ -73,7 +73,9 @@ match: 86,
       >
         Evaluar respuesta
       </button>
-
+<p style={{ fontSize: 13, color: "#666" }}>
+  Máximo 800 caracteres. No ingreses datos personales.
+</p>
       {result && (
         <section style={{ marginTop: 35 }}>
           <h2>Evaluación de IA</h2>
