@@ -8,7 +8,7 @@ export default function Home() {
 
   function evaluate() {
     if (answer.trim().length < 20) {
-      alert("Escribe una respuesta de al menos 20 caracteres.");
+setResult({ error: "Escribe una respuesta de al menos 20 caracteres." });
       return;
     }
 
@@ -73,6 +73,11 @@ match: 86,
       >
         Evaluar respuesta
       </button>
+      {result?.error && (
+  <p style={{ color: "red", fontWeight: "bold" }}>
+    {result.error}
+  </p>
+)}
 <p style={{ fontSize: 13, color: "#666" }}>
   Máximo 800 caracteres. No ingreses datos personales.
 </p>
@@ -110,6 +115,7 @@ match: 86,
             <h3>Analista Junior de Negocios — Café del Centro</h3>
             <p>
             Internship simulado · Empresa ficticia · Ciudad de México · Modalidad híbrida
+
             </p>
             <p>
               Tu habilidad demostrada de Análisis de Negocio coincide con esta
