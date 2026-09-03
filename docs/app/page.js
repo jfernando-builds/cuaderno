@@ -18,7 +18,9 @@ export default function Home() {
       level: "Intermedio Alto",
       confidence: 0.82,
     status: answer.length < 80 ? "NEEDS HUMAN REVIEW" : "VERIFICADA",
-    
+    opportunity: "Analista Junior de Negocios",
+match: 86,
+
     });
   }
 
