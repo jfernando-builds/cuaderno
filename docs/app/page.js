@@ -100,7 +100,7 @@ match: 86,
             <p>Estado: {result.status}</p>
             <p>Puntuación: {result.score}/100</p>
             <p>Nivel: {result.level}</p>
-            <p>Confianza IA: {result.confidence}</p>
+            Confianza IA: {Math.round(result.confidence * 100)}%
           </div>
 
           <div
