@@ -111,3 +111,24 @@ flowchart LR
 •⁠  ⁠Inputs will be validated.
 •⁠  ⁠Uploaded images will not be permanently stored.
 •⁠  ⁠Any simulated AI output will be clearly labeled.
+## 12. Test Plan
+
+### Mechanical Test
+ 1.⁠ ⁠Open the deployed app.
+ 2.⁠ ⁠Upload a sample payment screenshot with invented data.
+ 3.⁠ ⁠Enter the expected counterparty name.
+ 4.⁠ ⁠Confirm the app accepts and analyzes the image.
+ 5.⁠ ⁠Confirm the result is Consistent, Inconsistent, or Insufficient.
+ 6.⁠ ⁠Confirm the app explains what information was compared.
+ 7.⁠ ⁠Try an invalid input and confirm it is rejected.
+ 8.⁠ ⁠Find at least one bug.
+ 9.⁠ ⁠Fix the bug.
+10.⁠ ⁠Redeploy and test again.
+
+### Persona Test
+ 1.⁠ ⁠Test the product with synthetic user María.
+ 2.⁠ ⁠Show her each screen in order.
+ 3.⁠ ⁠Record what confuses her and where she would quit.
+ 4.⁠ ⁠Identify the worst usability problem.
+ 5.⁠ ⁠Fix that problem.
+ 6.⁠ ⁠Redeploy the improved version.
