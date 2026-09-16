@@ -1,6 +1,6 @@
 export const metadata = {
-  title: "Evidence Organizer",
-  description: "Applicant-controlled evidence organization",
+  title: "Ensayo de sismo | Cuaderno",
+  description: "Rehearsal breve y simulada de decisiones durante un sismo.",
 };
 
 export default function RootLayout({ children }) {
