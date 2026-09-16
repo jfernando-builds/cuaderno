@@ -125,6 +125,12 @@ h1 {
   font: 700 0.8rem Arial, sans-serif;
 }
 
+.voice-note {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font: 0.78rem/1.4 Arial, sans-serif;
+}
+
 .choice-list {
   display: grid;
   gap: 12px;

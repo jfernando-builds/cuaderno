@@ -6,10 +6,12 @@ import "./week6.css";
 export default function Week6() {
   const [scene, setScene] = useState("start");
   const [choices, setChoices] = useState([]);
+  const [voiceMessage, setVoiceMessage] = useState("");
 
   function restart() {
     setScene("start");
     setChoices([]);
+    setVoiceMessage("");
   }
 
   function chooseNext(choice) {
@@ -20,7 +22,11 @@ export default function Week6() {
   }
 
   function speak(text) {
-    if (typeof window === "undefined" || !window.speechSynthesis) return;
+    if (typeof window === "undefined" || !window.speechSynthesis) {
+      setVoiceMessage("La lectura de voz no está disponible en este navegador.");
+      return;
+    }
+    setVoiceMessage("Reproduciendo texto de la escena.");
     window.speechSynthesis.cancel();
     window.speechSynthesis.speak(new SpeechSynthesisUtterance(text));
   }
@@ -52,6 +58,7 @@ export default function Week6() {
             <span>ESCENA SIMULADA</span>
             <button className="voice-button" onClick={() => speak("El suelo comienza a moverse. Estas cerca de una ventana. Que haces primero?")}>Escuchar</button>
           </div>
+          {voiceMessage && <p className="voice-note">{voiceMessage}</p>}
           <h1 id="scene-title">El suelo comienza a moverse.</h1>
           <p className="scene-copy">
             Estás cerca de una ventana. ¿Qué haces primero?
@@ -78,6 +85,7 @@ export default function Week6() {
             <span>EVENTO INESPERADO</span>
             <button className="voice-button" onClick={() => speak("La salida principal esta bloqueada. Elige que haces a continuacion.")}>Escuchar</button>
           </div>
+          {voiceMessage && <p className="voice-note">{voiceMessage}</p>}
           <h1 id="scene-title">La salida principal está bloqueada.</h1>
           <p className="scene-copy">
             {choices[0] === "Ir hacia la salida principal"
@@ -106,6 +114,7 @@ export default function Week6() {
             <span>ESCENA SIMULADA</span>
             <button className="voice-button" onClick={() => speak("El movimiento disminuye. Que decides hacer ahora?")}>Escuchar</button>
           </div>
+          {voiceMessage && <p className="voice-note">{voiceMessage}</p>}
           <h1 id="scene-title">El movimiento disminuye.</h1>
           <p className="scene-copy">¿Qué decides hacer ahora?</p>
           <div className="choice-list">
