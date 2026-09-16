@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import "./week6.css";
 
 export default function Week6() {
   const [scene, setScene] = useState("start");
@@ -18,11 +19,23 @@ export default function Week6() {
     if (scene === "final") setScene("debrief");
   }
 
+  function speak(text) {
+    if (typeof window === "undefined" || !window.speechSynthesis) return;
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(new SpeechSynthesisUtterance(text));
+  }
+
   return (
     <main className="rehearsal-shell">
       {scene === "start" ? (
         <section className="intro-panel" aria-labelledby="page-title">
           <p className="eyebrow">ENSAYO BREVE · 01</p>
+          <div className="visual-stage" aria-label="Visual simulado de una habitación">
+            <span className="window-shape" />
+            <span className="room-line" />
+            <span className="shake-mark">~ ~ ~</span>
+            <span className="visual-label">SIMULACIÓN VISUAL</span>
+          </div>
           <h1 id="page-title">Un minuto para practicar.</h1>
           <p className="intro-copy">
             Una experiencia simulada de decisiones durante un sismo. No es una
@@ -35,6 +48,10 @@ export default function Week6() {
       ) : scene === "first" ? (
         <section className="scene-panel" aria-labelledby="scene-title">
           <p className="eyebrow">ENSAYO BREVE · 01 / 03</p>
+          <div className="scene-meta">
+            <span>ESCENA SIMULADA</span>
+            <button className="voice-button" onClick={() => speak("El suelo comienza a moverse. Estas cerca de una ventana. Que haces primero?")}>Escuchar</button>
+          </div>
           <h1 id="scene-title">El suelo comienza a moverse.</h1>
           <p className="scene-copy">
             Estás cerca de una ventana. ¿Qué haces primero?
@@ -57,6 +74,10 @@ export default function Week6() {
       ) : scene === "blocked" ? (
         <section className="scene-panel" aria-labelledby="scene-title">
           <p className="eyebrow">ENSAYO BREVE · 02 / 03</p>
+          <div className="scene-meta">
+            <span>EVENTO INESPERADO</span>
+            <button className="voice-button" onClick={() => speak("La salida principal esta bloqueada. Elige que haces a continuacion.")}>Escuchar</button>
+          </div>
           <h1 id="scene-title">La salida principal está bloqueada.</h1>
           <p className="scene-copy">
             {choices[0] === "Ir hacia la salida principal"
@@ -81,6 +102,10 @@ export default function Week6() {
       ) : scene === "final" ? (
         <section className="scene-panel" aria-labelledby="scene-title">
           <p className="eyebrow">ENSAYO BREVE · 03 / 03</p>
+          <div className="scene-meta">
+            <span>ESCENA SIMULADA</span>
+            <button className="voice-button" onClick={() => speak("El movimiento disminuye. Que decides hacer ahora?")}>Escuchar</button>
+          </div>
           <h1 id="scene-title">El movimiento disminuye.</h1>
           <p className="scene-copy">¿Qué decides hacer ahora?</p>
           <div className="choice-list">
