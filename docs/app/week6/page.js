@@ -142,6 +142,11 @@ export default function Week6() {
             ))}
           </ol>
           <p className="scene-copy">
+            Alejarte de la ventana fue una opción más segura. Si la salida
+            principal está bloqueada, evita forzarla y busca la alternativa
+            segura designada.
+          </p>
+          <p className="scene-copy">
             Esto describe únicamente lo que elegiste aquí. No es una medida de
             tu preparación ni predice lo que harías fuera de la simulación.
           </p>
