@@ -4,13 +4,18 @@ import { useState } from "react";
 
 export default function Week6() {
   const [scene, setScene] = useState("start");
+  const [choices, setChoices] = useState([]);
 
   function restart() {
     setScene("start");
+    setChoices([]);
   }
 
-  function chooseNext() {
-    setScene(scene === "first" ? "blocked" : "final");
+  function chooseNext(choice) {
+    setChoices((current) => [...current, choice]);
+    if (scene === "first") setScene("blocked");
+    if (scene === "blocked") setScene("final");
+    if (scene === "final") setScene("debrief");
   }
 
   return (
@@ -31,12 +36,20 @@ export default function Week6() {
         <section className="scene-panel" aria-labelledby="scene-title">
           <p className="eyebrow">ENSAYO BREVE · 01 / 03</p>
           <h1 id="scene-title">El suelo comienza a moverse.</h1>
-          <p className="scene-copy">Estás cerca de una ventana. ¿Qué haces primero?</p>
+          <p className="scene-copy">
+            Estás cerca de una ventana. ¿Qué haces primero?
+          </p>
           <div className="choice-list">
-            <button className="choice-button" onClick={chooseNext}>
+            <button
+              className="choice-button"
+              onClick={() => chooseNext("Alejarme de la ventana")}
+            >
               Alejarme de la ventana
             </button>
-            <button className="choice-button" onClick={chooseNext}>
+            <button
+              className="choice-button"
+              onClick={() => chooseNext("Ir hacia la salida principal")}
+            >
               Ir hacia la salida principal
             </button>
           </div>
@@ -45,29 +58,62 @@ export default function Week6() {
         <section className="scene-panel" aria-labelledby="scene-title">
           <p className="eyebrow">ENSAYO BREVE · 02 / 03</p>
           <h1 id="scene-title">La salida principal está bloqueada.</h1>
-          <p className="scene-copy">Elige qué haces a continuación.</p>
+          <p className="scene-copy">
+            {choices[0] === "Ir hacia la salida principal"
+              ? "La ruta que elegiste ya no está disponible. Elige qué haces a continuación."
+              : "Elige qué haces a continuación."}
+          </p>
           <div className="choice-list">
-            <button className="choice-button" onClick={chooseNext}>
+            <button
+              className="choice-button"
+              onClick={() => chooseNext("Buscar una ruta lateral despejada")}
+            >
               Buscar una ruta lateral despejada
             </button>
-            <button className="choice-button" onClick={chooseNext}>
+            <button
+              className="choice-button"
+              onClick={() => chooseNext("Esperar y observar el espacio")}
+            >
               Esperar y observar el espacio
             </button>
           </div>
         </section>
-      ) : (
+      ) : scene === "final" ? (
         <section className="scene-panel" aria-labelledby="scene-title">
           <p className="eyebrow">ENSAYO BREVE · 03 / 03</p>
           <h1 id="scene-title">El movimiento disminuye.</h1>
           <p className="scene-copy">¿Qué decides hacer ahora?</p>
           <div className="choice-list">
-            <button className="choice-button" onClick={restart}>
+            <button
+              className="choice-button"
+              onClick={() => chooseNext("Terminar el ensayo")}
+            >
               Terminar ensayo
             </button>
-            <button className="choice-button" onClick={restart}>
+            <button
+              className="choice-button"
+              onClick={() => chooseNext("Repetir el ensayo")}
+            >
               Repetir el ensayo
             </button>
           </div>
+        </section>
+      ) : (
+        <section className="scene-panel" aria-labelledby="debrief-title">
+          <p className="eyebrow">ENSAYO COMPLETO</p>
+          <h1 id="debrief-title">Tus decisiones en esta simulación</h1>
+          <ol className="decision-list">
+            {choices.map((choice, index) => (
+              <li key={`${choice}-${index}`}>{choice}</li>
+            ))}
+          </ol>
+          <p className="scene-copy">
+            Esto describe únicamente lo que elegiste aquí. No es una medida de
+            tu preparación ni predice lo que harías fuera de la simulación.
+          </p>
+          <button className="primary-button" onClick={restart}>
+            Repetir ensayo
+          </button>
         </section>
       )}
     </main>
