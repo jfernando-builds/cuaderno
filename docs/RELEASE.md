@@ -13,6 +13,7 @@
 1. **V1:** `https://cuaderno-4ntoq8kd9-jfernando-builds-projects.vercel.app` (production alias: `https://cuaderno-taupe.vercel.app`). The public UI loaded, rendered its baseline $360 MXN estimate, and showed an over-budget state when the fictional budget was changed to $300.
 2. **V2:** `https://cuaderno-5uffjyhqz-jfernando-builds-projects.vercel.app` (same production alias). Released after the public test found that decimal budget values calculated but HTML `step=1` marked them natively invalid. V2 uses centavo precision for MXN inputs and fractional review minutes, and was checked on the public alias.
 3. **Security patch:** `https://cuaderno-ro8g80eu2-jfernando-builds-projects.vercel.app` (same production alias). After `npm audit fix`, the app was upgraded to Next.js 16.4.0, the production dependency audit reported 0 vulnerabilities, all six tests and the production build passed, and the alias returned HTTP 200.
+4. **Latest Git-triggered deployment:** `https://cuaderno-ic373c30h-jfernando-builds-projects.vercel.app` is `Ready` in Production and aliases to `https://cuaderno-taupe.vercel.app`. Vercel CLI inspection confirmed its build and alias; the final alias again returned HTTP 200.
 
 An additional CLI invocation from the nested `docs/` folder deployed to the separately linked existing `cuaderno-week6` Vercel project (`https://cuaderno-week6.vercel.app`). That is not the First-Proof deliverable URL; the correct app was separately deployed to `cuaderno` as V2 above.
 
@@ -37,11 +38,13 @@ An additional CLI invocation from the nested `docs/` folder deployed to the sepa
 - `237ad92` — `docs: record production persona and decisions`
 - `3e1d581` — `fix: align native numeric steps with valid precision`
 - `7bc7815` — `fix: update vulnerable transitive dependencies`
+- `761c101` — `docs: package release evidence and assignment deliverables`
 
-All six First-Proof feature, persona, bug-fix, and security commits were pushed to `origin/main`; earlier local commits already ahead of the remote were also pushed. Uncommitted pre-existing Week 5/Week 6 workspace files remain uncommitted and were not added by this release.
+All seven First-Proof feature, persona, bug-fix, security, and deliverable commits were pushed to `origin/main`; earlier local commits already ahead of the remote were also pushed. Uncommitted pre-existing Week 5/Week 6 workspace files remain uncommitted and were not added by this release.
 
 ## Assignment files
 
 - PDFs were generated from the real Markdown packet, persona walkthrough, and session record: `PACKET_JoseFernando.pdf`, `PERSONA_JoseFernando.pdf`, and `BUILDCHAT_JoseFernando.pdf`.
-- `BUILDCHAT_JoseFernando.pdf` is transparently labeled a session record, not a verbatim transcript, because the only available debug log has a session-start event and no serialized chat turns.
+- `BUILDCHAT_JoseFernando.pdf` is transparently labeled a session record, not a complete transcript: the local index has only four rows for this session and omits intermediate assistant/tool turns. Exact export steps are documented in `BUILDCHAT.md`.
+- The packet includes Mermaid source and links the original illustrative SVG UI mockup. An actual externally image-generated First-Proof mockup was not available; none is falsely claimed or embedded as AI-generated evidence.
 - Recording instructions for the requested three-minute walkthrough and 30-second reflection are in `DEMO.md`. The MP4 has not been recorded or generated.
