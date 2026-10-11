@@ -38,3 +38,13 @@ test("invalid, fractional-count, negative, and out-of-range values are rejected"
 test("zero employer count cannot produce division by zero", () => {
   assert.ok(validateInputs({ ...DEFAULT_INPUTS, employers: 0 }).employers);
 });
+
+test("fractional MXN assumptions retain centavo precision", () => {
+  const result = calculateEconomics({
+    ...DEFAULT_INPUTS,
+    pilotBudget: 500.5,
+    willingnessToPayPerEmployer: 250.25,
+  });
+  assert.equal(result.budgetGap, 140.5);
+  assert.equal(result.willingnessGap, 390.75);
+});

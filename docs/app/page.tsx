@@ -26,11 +26,11 @@ const currencyFields: { key: PilotField; max: number }[] = [
   { key: "willingnessToPayPerEmployer", max: 1000000 },
 ];
 
-const fields: { key: PilotField; max: number; step: number; prefix?: string; suffix?: string }[] = [
+const fields: { key: PilotField; max: number; step: number | "any"; prefix?: string; suffix?: string }[] = [
   { key: "candidates", max: 1000, step: 1 },
   { key: "employers", max: 100, step: 1 },
-  { key: "reviewMinutes", max: 120, step: 1, suffix: "min" },
-  ...currencyFields.map(({ key, max }) => ({ key, max, step: 1, prefix: "$", suffix: "MXN" })),
+  { key: "reviewMinutes", max: 120, step: "any", suffix: "min" },
+  ...currencyFields.map(({ key, max }) => ({ key, max, step: 0.01, prefix: "$", suffix: "MXN" })),
 ];
 
 const scenarioDetails = [
