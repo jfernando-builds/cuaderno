@@ -1,6 +1,8 @@
+import "./globals.css";
+
 export const metadata = {
-  title: "Ensayo de sismo | Cuaderno",
-  description: "Rehearsal breve y simulada de decisiones durante un sismo.",
+  title: "First-Proof | Pilot Economics",
+  description: "A transparent, fictional pilot review-cost calculator for Mexican small businesses.",
 };
 
 export default function RootLayout({ children }) {
