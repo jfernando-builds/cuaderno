@@ -1,149 +1,41 @@
-# WEEK 3 — IMPLEMENTATION PROMPT
+# First-Proof Pilot Economics — Implementation Plan
 
-Build a small, testable web app for a pre-payment counterparty consistency workflow for small Mexican businesses that transact through WhatsApp.
+## Implementation stages
 
-The app must follow the Week 3 packet and preserve uncertainty at all times.
+1. **Packet before code:** document target user, workflow, economics, guardrails, mockup, tests, and evidence boundaries in `PACKET.md`.
+2. **Typed calculation core:** implement pure TypeScript input bounds, deterministic cost formulas, three review-time scenarios, and tested fictional defaults.
+3. **Responsive dashboard:** build editable controls, baseline cost/gap summary, feasibility states, scenario comparison, proposed stop rules, and explicitly simulated explanation.
+4. **Mechanical and persona testing:** run production build and interaction checks, exercise invalid input and edge cases, walk the UI as a skeptical time-constrained owner, log an actual observed bug, and fix the most serious usability issue.
+5. **Release:** commit scoped changes without overwriting existing work, push the existing repository, deploy v1, apply and verify a documented fix, then deploy v2 if deployment access is available. Record actual URLs and outcomes only.
+6. **Deliverables:** update decisions/persona documentation, generate PDFs from final real documents and available transcript only when tools/data permit, and give a concise three-minute demo plus 30-second reflection recording guide.
 
-## Core User
+## Acceptance criteria
 
-María, 54 years old, informal food seller in Mexico.
+- Existing Next.js project and user work remain intact; no new repo is created.
+- Next.js, TypeScript, Tailwind CSS; professional, responsive English SaaS interface.
+- Defaults: 12 candidates and 3 employers; review minutes and hourly MXN rate, total budget, and per-employer willingness to pay are editable.
+- Deterministic calculation: total cost = candidates × minutes / 60 × hourly cost; unit costs divide by candidates/employers; budget gap = budget − total cost; willingness gap = employers × per-employer willingness − total cost.
+- Optimistic, baseline, pessimistic scenarios use disclosed review-time assumptions; feasibility indicators separate budget coverage and willingness-to-pay coverage.
+- Inputs have sensible bounds and accessible validation; invalid results, NaN, and Infinity are never displayed.
+- AI explanation is either provided by a protected server integration or clearly labeled simulated; no secrets in source, browser, or Git.
+- Fictional data only; no personal data persistence without authentication and Row Level Security.
+- No CV builder, job board, candidate fees, universal employability score, automatic ranking/rejection, or unpaid productive client work.
+- Every future proof requires bounded task, rubric, AI disclosure, live revision/explanation, and named human reviewer; candidate sees/corrects/exports results first and authorizes sharing; unsuccessful attempts remain private.
+- Stop rules are proposed and explicitly not validated: fewer than 2/3 employers willing to pay again, median review >10 min, no useful additional hiring evidence.
+- Build passes; actual bug and persona findings are documented without fabricated screenshots or outcomes.
+- At least five meaningful commits and two verified deployments only if GitHub/Vercel access permits; otherwise report blockers honestly.
 
-She mainly uses WhatsApp, reads slowly, is uncomfortable with complex apps, and distrusts automated financial decisions.
+## Commit plan
 
-## Main Goal
+1. `docs: add First-Proof packet before code` — packet and original SVG mockup.
+2. `feat: add typed pilot economics model` — domain types, validation, scenario logic, fictional defaults, tests.
+3. `feat: build responsive First-Proof dashboard` — accessible controls, KPI cards, scenario visualization, guardrails.
+4. `docs: record decisions and persona walkthrough` — decisions, actual persona observations, observed bug.
+5. `fix: resolve verified usability or calculation bug` — targeted fix and regression test.
+6. `docs: record release evidence` — only real commit/deploy URLs, tests, and transcript-derived deliverables.
 
-Before making a payment, María should be able to:
+Commit only intended files. Preserve unrelated existing changes. Do not claim any commit, push, test, generated image, PDF, or deployment that did not actually occur.
 
- 1.⁠ ⁠Upload one screenshot or image related to a proposed payment.
- 2.⁠ ⁠Enter the name or identifier of the person she expects to pay.
- 3.⁠ ⁠Receive a bounded result:
-   - Consistent
-   - Inconsistent
-   - Insufficient
- 4.⁠ ⁠See exactly what information was compared.
- 5.⁠ ⁠Decide what to do next.
+---
 
-The app must NEVER say that a person is safe, trusted, fraudulent, verified, or suspicious.
-
-## Required Features
-
-### Feature 1 — Upload Evidence
-•⁠  ⁠Accept image files only.
-•⁠  ⁠Validate file type.
-•⁠  ⁠Reject invalid files.
-•⁠  ⁠Show a simple preview.
-
-### Feature 2 — Expected Counterparty
-•⁠  ⁠One text input.
-•⁠  ⁠Maximum length of 80 characters.
-•⁠  ⁠Reject empty input.
-
-### Feature 3 — Vision Analysis
-•⁠  ⁠Use a vision-capable model to extract visible information from the uploaded image.
-•⁠  ⁠Extract only information actually visible in the screenshot.
-•⁠  ⁠Do not invent missing information.
-
-### Feature 4 — Comparison
-Compare:
-•⁠  ⁠User-entered expected name or identifier.
-•⁠  ⁠Information extracted from the image.
-
-Return exactly one status:
-•⁠  ⁠Consistent
-•⁠  ⁠Inconsistent
-•⁠  ⁠Insufficient
-
-### Feature 5 — Bounded Explanation
-
-For Consistent:
-Explain what matches, but state that the match does not prove the person is safe or trustworthy.
-
-For Inconsistent:
-Show the specific difference and state that the difference does not prove fraud.
-
-For Insufficient:
-Explain what information is missing and state that missing information does not make the person suspicious.
-
-### Feature 6 — Next Action
-
-Show simple options such as:
-•⁠  ⁠Check another way
-•⁠  ⁠Upload another image
-•⁠  ⁠Continue anyway
-
-Do not automatically block or approve any payment.
-
-## UI Requirements
-
-Keep the interface very simple.
-
-Main title:
-“Check before you pay”
-
-Suggested flow:
-
- 1.⁠ ⁠Upload screenshot
- 2.⁠ ⁠Enter expected name
- 3.⁠ ⁠Compare information
- 4.⁠ ⁠Read result
- 5.⁠ ⁠Choose next action
-
-Use large buttons, short text, and clear labels.
-
-## Security Requirements
-
-•⁠  ⁠No API keys in source code.
-•⁠  ⁠Use environment variables.
-•⁠  ⁠Do not permanently store uploaded images.
-•⁠  ⁠Do not use real personal data in demo content.
-•⁠  ⁠Validate all form inputs.
-•⁠  ⁠Clearly label simulated AI output if any AI result is simulated.
-
-## Acceptance Criteria
-
-The build is acceptable when:
-
- 1.⁠ ⁠The app loads at a public URL.
- 2.⁠ ⁠An image can be uploaded.
- 3.⁠ ⁠Invalid input is rejected.
- 4.⁠ ⁠A name can be entered.
- 5.⁠ ⁠The system returns Consistent, Inconsistent, or Insufficient.
- 6.⁠ ⁠The explanation shows what was compared.
- 7.⁠ ⁠The app never gives a trust score or fraud judgment.
- 8.⁠ ⁠No secret is exposed in GitHub.
- 9.⁠ ⁠The interface can be used without instructions.
-10.⁠ ⁠The app works on desktop and mobile widths.
-
-## Commit Plan
-
-Commit 1:
-Packet before code.
-
-Commit 2:
-Create basic Week 3 interface.
-
-Commit 3:
-Add image upload and input validation.
-
-Commit 4:
-Add comparison logic and bounded result states.
-
-Commit 5:
-Fix test bug and improve usability after persona test.
-
-Use at least two Vercel deploys during the process.
-
-## Build Priority
-
-Keep the product small.
-
-Do not add:
-•⁠  ⁠Authentication unless personal data is stored.
-•⁠  ⁠Database unless necessary.
-•⁠  ⁠WhatsApp API integration.
-•⁠  ⁠Payment processing.
-•⁠  ⁠Fraud scoring.
-•⁠  ⁠Deepfake detection.
-•⁠  ⁠Government or bank verification.
-
-The goal is to test the minimum viable workflow, not to build a complete verification platform.
+# Archived prior implementation prompt
